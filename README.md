@@ -2,6 +2,93 @@
 **task #0**
 ## Sorting Algorithm
 
+
+# Counting Sort
+
+# Complexity
+- Time complexity: ***O(n+k)***
+<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+
+- Space complexity:***O(n)***
+<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+
+# Code
+```
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) {
+    countingSort(nums);
+    return nums;
+    }
+ void countingSort(vector<int>& nums)
+ {
+    unordered_map<int,int> counts;
+
+    int mini=*min_element(nums.begin(),nums.end());
+    int maxi=*max_element(nums.begin(),nums.end());
+
+    for(auto & val: nums) counts[val]++;
+
+    int index=0;
+    for(int i=mini; i<=maxi; i++)
+    {
+        while(counts[i]>0)
+        {
+            nums[index]=i;
+            index++;
+            counts[i]--;
+        }
+    }
+ }
+};
+```
+# Merge Sort
+
+# Complexity
+- Time complexity:  ***O(nlogn)***
+<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+
+- Space complexity:  ***O(n)***
+<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+
+# Code
+```
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) {
+    mergeSort(nums,0,nums.size()-1);
+    return nums;
+    }
+void merge(vector<int>&nums,int start, int mid, int end)
+{
+    int p=start;
+    int q=mid+1;
+    vector<int>num(end-start+1,-1);
+    int k=0;
+
+    for(int i=start; i<=end; i++)
+    {
+        if(p>mid) num[k++]=nums[q++];
+        else if(q>end) num[k++]=nums[p++];
+        else if(nums[p]>nums[q]) num[k++]=nums[q++];
+        else
+        num[k++]=nums[p++];
+    }
+    for(int i=0; i<k; i++)
+     nums[start++]=num[i];
+}
+void mergeSort(vector<int>&nums,int start, int end)
+{
+    if(start<end) 
+    {
+        int mid=(start+end)/2;
+        mergeSort(nums,start,mid);
+        mergeSort(nums,mid+1,end);
+        merge(nums,start,mid,end);
+    }
+}
+};
+```
 **Task #1**
 ## Rotate Array
 > Sample Input Output
