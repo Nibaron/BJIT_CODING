@@ -1,4 +1,7 @@
 # BJIT Trainee 
+**task #0**
+## Sorting Algorithm
+
 **Task #1**
 ## Rotate Array
 > Sample Input Output
@@ -49,7 +52,7 @@ public:
     }
 };
 ```
-**Task #2*
+**Task #2**
 ## Move Zeroes
 Given an integer array nums, move all 0's to the end of it 
 while maintaining the relative order of the non-zero elements.
@@ -116,8 +119,10 @@ public:
 ```
 
 
-**Task #1**
-## 
+**Task #4**
+## Linked List
+Write a function to remove duplicate item in a linked link L
+where the head is given and return the list L
 > Sample Input Output
 ```
 
@@ -134,3 +139,72 @@ public:
 ```
 
 ```
+**Task #5**
+## Recursion Function
+Write a recursive function to output the digit in Number N.
+> Sample Input Output
+```
+input: 123
+output: 1 2 3
+```
+
+**task #6**
+## Abbreviation
+write a function to check abbreviation is correct or Not.
+> Sample Input Output
+```
+String A: Bangladesh Japan Information Technology
+String B: BJIT
+output: true
+```
+
+**task #7**
+## Palindrome Check
+write a function to check palindrome Using both STACK and QUEUE.
+
+**task #8**
+## Consecutive Triplet
+Find total number of Consecutive triplet in a given array.
+> Sample Input Output
+```
+input: 3 2 4 5 6 8 9 10 (not sorted)
+output: 3 
+explanation: ( 2 3 4), (3,4,5), (8,9,10)
+```
+**task #9**
+## ADDITION & SUBTRACTION
+How do you perform addition and substraction of two huge numbers (bigger than INT_MAX).
+> Sample Input Output
+```
+input:
+output:
+```
+**task #10**
+## Duplicate Words
+A string contains words, count how many duplictae words are there.
+> Sample Input Output
+```
+input: i am a boy, i can cook.
+output:1 (i)
+```
+**task #11**
+## Kadane's Algorithm
+
+**task #12**
+## Min heap Implementation
+
+**task #13**
+## Number theory
+A integer N is given, find x and y where x*y==n and abs(x-y) is minimum of all possible x,y.
+
+**task #14**
+## Redundant Words
+1.Find redundant words in a given string.
+2. Size of arrays after removing duplicate.
+
+**task #15**
+## Sub string
+Find longest non-repeatable sub-string.
+
+
+
