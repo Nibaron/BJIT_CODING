@@ -210,20 +210,76 @@ public:
 ## Linked List
 Write a function to remove duplicate item in a linked link L
 where the head is given and return the list L
-> Sample Input Output
-```
 
+> Sample Input Output
+```Original list: 1 2 3 2 4 
+List after removing duplicates: 1 2 3 4 
 ```
 >Approach
 ```
-
+This code defines the Node struct, the removeDuplicates function that was explained earlier, 
+and a printList function that prints the values of a linked list. The main function creates 
+a sample linked list with duplicate values, prints the original list, 
+calls the removeDuplicates function, prints the modified list, and 
+then returns 0 to indicate successful execution.
 ```
 > My Code
 ```
+#include <iostream>
+#include <unordered_set>
 
-```
->Best Code
-```
+struct Node {
+    int val;
+    Node* next;
+    Node(int x) : val(x), next(nullptr) {}
+};
+
+Node* removeDuplicates(Node* head) {
+    std::unordered_set<int> seen;
+    Node* curr = head;
+    Node* prev = nullptr;
+
+    while (curr) {
+        if (seen.count(curr->val)) {
+            prev->next = curr->next;
+            delete curr;
+            curr = prev->next;
+        } else {
+            seen.insert(curr->val);
+            prev = curr;
+            curr = curr->next;
+        }
+    }
+
+    return head;
+}
+
+void printList(Node* head) {
+    Node* curr = head;
+    while (curr) {
+        std::cout << curr->val << " ";
+        curr = curr->next;
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    Node* head = new Node(1);
+    head->next = new Node(2);
+    head->next->next = new Node(3);
+    head->next->next->next = new Node(2);
+    head->next->next->next->next = new Node(4);
+
+    std::cout << "Original list: ";
+    printList(head);
+
+    head = removeDuplicates(head);
+
+    std::cout << "List after removing duplicates: ";
+    printList(head);
+
+    return 0;
+}
 
 ```
 **Task #5**
@@ -233,6 +289,27 @@ Write a recursive function to output the digit in Number N.
 ```
 input: 123
 output: 1 2 3
+```
+> My Code
+```
+#include <iostream>
+
+void outputDigits(int n) {
+    if (n < 10) {
+        std::cout << n << " ";
+        return;
+    }
+    outputDigits(n / 10);
+    std::cout << n % 10 << " ";
+}
+
+int main() {
+    int n = 123456;
+    std::cout << "Digits in " << n << " are: ";
+    outputDigits(n);
+    std::cout << std::endl;
+    return 0;
+}
 ```
 
 **task #6**
