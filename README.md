@@ -1,7 +1,5 @@
 # BJIT Trainee 
 **task #0**
-## Sorting Algorithm
-
 
 # Counting Sort
 
