@@ -319,10 +319,131 @@ String A: Bangladesh Japan Information Technology
 String B: BJIT
 output: true
 ```
+> Code
+```
+#include<bits/stdc++.h>
+using namespace std;
 
+bool validWordAbbreviation(string word, string abbr) {
+    string abr="";
+    abr+=word[0];
+    for(int i=1; i<word.size(); i++)
+    {
+        if(word[i]==' ') 
+         abr+=word[i+1];
+    }
+    return abbr==abr;
+}
+
+int main() {
+    string word = "Bangladesh Japan Information Technology";
+    string abbr = "BJIT";
+    if (validWordAbbreviation(word, abbr))
+    cout << abbr << " is a valid abbreviation of " << word << std::endl;
+    else 
+    cout << abbr << " is not a valid abbreviation of " << word << std::endl;
+    return 0;
+}
+```
 **task #7**
 ## Palindrome Check
 write a function to check palindrome Using both STACK and QUEUE.
+
+> STACK
+```
+#include <iostream>
+#include <stack>
+#include <string>
+
+using namespace std;
+
+bool isPalindrome(string str) {
+    stack<char> stk;
+
+    // push all characters onto the stack
+    for (int i = 0; i < str.length(); i++) {
+        char c = tolower(str[i]);
+        if (isalpha(c)) {
+            stk.push(c);
+        }
+    }
+
+    // pop from stack and compare to original string
+    for (int i = 0; i < str.length(); i++) {
+        char c = tolower(str[i]);
+        if (isalpha(c) && c != stk.top()) {
+            return false;
+        }
+        if (isalpha(c)) {
+            stk.pop();
+        }
+    }
+
+    return true;
+}
+
+int main() {
+    string str;
+    cout << "Enter a string: ";
+    getline(cin, str);
+
+    if (isPalindrome(str)) {
+        cout << str << " is a palindrome." << endl;
+    } else {
+        cout << str << " is not a palindrome." << endl;
+    }
+
+    return 0;
+}
+```
+> QUEUE
+```
+#include <iostream>
+#include <queue>
+#include <string>
+
+using namespace std;
+
+bool isPalindrome(string str) {
+    queue<char> que;
+
+    // push all characters onto the queue
+    for (int i = 0; i < str.length(); i++) {
+        char c = tolower(str[i]);
+        if (isalpha(c)) {
+            que.push(c);
+        }
+    }
+
+    // dequeue from queue and compare to original string
+    for (int i = 0; i < str.length(); i++) {
+        char c = tolower(str[i]);
+        if (isalpha(c) && c != que.front()) {
+            return false;
+        }
+        if (isalpha(c)) {
+            que.pop();
+        }
+    }
+
+    return true;
+}
+
+int main() {
+    string str;
+    cout << "Enter a string: ";
+    getline(cin, str);
+
+    if (isPalindrome(str)) {
+        cout << str << " is a palindrome." << endl;
+    } else {
+        cout << str << " is not a palindrome." << endl;
+    }
+
+    return 0;
+}
+
+```
 
 **task #8**
 ## Consecutive Triplet
@@ -332,6 +453,35 @@ Find total number of Consecutive triplet in a given array.
 input: 3 2 4 5 6 8 9 10 (not sorted)
 output: 3 
 explanation: ( 2 3 4), (3,4,5), (8,9,10)
+```
+> Code
+```
+#include <iostream>
+using namespace std;
+
+int countConsecutiveTriplets(int arr[], int n) {
+    int count = 0;
+
+    for (int i = 0; i < n - 2; i++) {
+        if (arr[i] + 1 == arr[i+1] && arr[i+1] + 1 == arr[i+2]) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    int arr[] = {1, 2, 3, 5, 6, 7, 8, 10, 12, 13};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    int totalCount = countConsecutiveTriplets(arr, n);
+
+    cout << "Total number of consecutive triplets: " << totalCount << endl;
+
+    return 0;
+}
+
 ```
 **task #9**
 ## ADDITION & SUBTRACTION
