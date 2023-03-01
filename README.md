@@ -416,7 +416,7 @@ bool isPalindrome(string str) {
     }
 
     // dequeue from queue and compare to original string
-    for (int i = 0; i < str.length(); i++) {
+    for (int i = str.length()-1; i >=0; i--) {
         char c = tolower(str[i]);
         if (isalpha(c) && c != que.front()) {
             return false;
@@ -491,32 +491,256 @@ How do you perform addition and substraction of two huge numbers (bigger than IN
 input:
 output:
 ```
+> code
+```
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+string add(string a, string b) {
+    string res;
+    int carry = 0, i = a.length() - 1, j = b.length() - 1;
+
+    while (i >= 0 || j >= 0 || carry) {
+        int sum = carry;
+        if (i >= 0) sum += a[i--] - '0';
+        if (j >= 0) sum += b[j--] - '0';
+        carry = sum / 10;
+        res.push_back((sum % 10) + '0');
+    }
+
+    reverse(res.begin(), res.end());
+    return res;
+}
+
+string subtract(string a, string b) {
+    string res;
+    int borrow = 0, i = a.length() - 1, j = b.length() - 1;
+
+    while (i >= 0 || j >= 0) {
+        int diff = borrow;
+        if (i >= 0) diff += a[i--] - '0';
+        if (j >= 0) diff -= b[j--] - '0';
+        borrow = (diff < 0);
+        res.push_back((borrow ? diff + 10 : diff) + '0');
+    }
+
+    reverse(res.begin(), res.end());
+    return res;
+}
+
+int main() {
+    string a = "12345678901234567890";
+    string b = "98765432109876543210";
+
+    cout << "a + b = " << add(a, b) << endl;
+    cout << "a - b = " << subtract(a, b) << endl;
+
+    return 0;
+}
+
+```
 **task #10**
 ## Duplicate Words
 A string contains words, count how many duplictae words are there.
 > Sample Input Output
 ```
 input: i am a boy, i can cook.
-output:1 (i)
+output: i : 2
 ```
+> code
+```
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <unordered_map>
+
+int main() {
+    std::string sentence = "The quick brown fox jumps over the lazy dog. The dog jumps over the fence.";
+    std::stringstream ss(sentence);
+    std::unordered_map<std::string, int> wordCount;
+
+    // loop through each word in the sentence
+    std::string word;
+    while (ss >> word) {
+        // increment the count for this word in the map
+        wordCount[word]++;
+    }
+
+    // output the results
+    std::cout << "Duplicate words in the sentence: " << std::endl;
+    for (auto& pair : wordCount) {
+        if (pair.second > 1) {
+            std::cout << pair.first << " : " << pair.second << std::endl;
+        }
+    }
+
+    return 0;
+}
+
+```
+
 **task #11**
-## Kadane's Algorithm
-
-**task #12**
 ## Min heap Implementation
+> code
+```
+#include <iostream>
+#include <vector>
 
-**task #13**
+class MinHeap {
+private:
+    std::vector<int> heap;
+
+    void heapifyUp(int index) {
+        if (index == 0) {
+            return;
+        }
+        int parentIndex = (index - 1) / 2;
+        if (heap[index] < heap[parentIndex]) {
+            std::swap(heap[index], heap[parentIndex]);
+            heapifyUp(parentIndex);
+        }
+    }
+
+    void heapifyDown(int index) {
+        int leftChildIndex = 2 * index + 1;
+        int rightChildIndex = 2 * index + 2;
+        int smallestIndex = index;
+        if (leftChildIndex < heap.size() && heap[leftChildIndex] < heap[smallestIndex]) {
+            smallestIndex = leftChildIndex;
+        }
+        if (rightChildIndex < heap.size() && heap[rightChildIndex] < heap[smallestIndex]) {
+            smallestIndex = rightChildIndex;
+        }
+        if (smallestIndex != index) {
+            std::swap(heap[index], heap[smallestIndex]);
+            heapifyDown(smallestIndex);
+        }
+    }
+
+public:
+    void insert(int value) {
+        heap.push_back(value);
+        heapifyUp(heap.size() - 1);
+    }
+
+    int pop() {
+        if (heap.empty()) {
+            throw std::out_of_range("Heap is empty");
+        }
+        int value = heap[0];
+        heap[0] = heap.back();
+        heap.pop_back();
+        heapifyDown(0);
+        return value;
+    }
+
+    int size() {
+        return heap.size();
+    }
+
+    bool empty() {
+        return heap.empty();
+    }
+};
+
+int main() {
+    MinHeap minHeap;
+    minHeap.insert(10);
+    minHeap.insert(5);
+    minHeap.insert(7);
+    minHeap.insert(3);
+    minHeap.insert(1);
+
+    std::cout << "Min heap size: " << minHeap.size() << std::endl;
+
+    while (!minHeap.empty()) {
+        std::cout << minHeap.pop() << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
+
+```
+**task #12**
 ## Number theory
 A integer N is given, find x and y where x*y==n and abs(x-y) is minimum of all possible x,y.
 
-**task #14**
-## Redundant Words
-1.Find redundant words in a given string.
-2. Size of arrays after removing duplicate.
+> Sample Input and Output
+```
+imput:12
+output: 3 4
+```
+>code
+```
+#include <bits/stdc++.h>
+using namespace std;
 
-**task #15**
+void printPFsInPairs(int n)
+{
+    int mul1=1,mul2=n;
+    for (int i = 1; i * i <= n; i++)
+    {
+        if (n % i == 0)
+        {
+            int a=i;
+            int b=n/i;
+            if(mul2-mul1 > b-a)
+            {mul1=a;mul2=b;}
+        }
+    }
+    cout<<mul1<<" "<<mul2;
+}
+ 
+// Driver code
+int main()
+{
+    int n = 12;
+    printPFsInPairs(n);
+    return 0;
+}
+
+```
+**task #13**
 ## Sub string
 Find longest non-repeatable sub-string.
 
+>Code
+```
+#include <iostream>
+#include <unordered_map>
+#include <string>
 
+using namespace std;
+
+string longestNonRepeatingSubstring(string str) {
+    unordered_map<char, int> charMap;
+    int start = 0, maxLength = 0;
+    for (int i = 0; i < str.length(); i++) {
+        char c = str[i];
+        if (charMap.find(c) != charMap.end() && charMap[c] >= start) {
+            // If the current character has already appeared in the current substring,
+            // update the starting index of the current substring to the position after
+            // the last occurrence of the character.
+            start = charMap[c] + 1;
+        }
+        charMap[c] = i; // Update the last occurrence of the character
+        int length = i - start + 1; // Calculate the length of the current substring
+        if (length > maxLength) {
+            maxLength = length;
+        }
+    }
+    return str.substr(start, maxLength);
+}
+
+int main() {
+    string str = "pwwkew";
+    string longestSubstr = longestNonRepeatingSubstring(str);
+    cout << "The longest non-repeating substring in \"" << str << "\" is \"" << longestSubstr << "\"." << endl;
+    return 0;
+}
+```
 
